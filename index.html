@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="theme-color" content="#263630">
+  <title>BoonBuy spreadsheet : catégories, tailles et photos QC</title>
+  <meta name="description" content="Explorez dix catégories avec ce guide BoonBuy spreadsheet. Comparez les tailles en centimètres, les variantes, les photos QC et les frais avant de commander.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:title" content="BoonBuy spreadsheet : le guide pour comparer les articles">
+  <meta property="og:description" content="Chaussures, vêtements et accessoires : trouvez votre catégorie et vérifiez les détails qui comptent avant de commander.">
+  <!-- index.html
+       Recherche éditoriale : la première page de Bing n'a pas pu être vérifiée directement.
+       Dix domaines ont été consultés dans les résultats de recherche accessibles, sans attribution de rang Bing :
+       sheetsboonbuy.com/browse, boonspreadsheet.com, boonbuyspreadsheet.page/about/,
+       ssfinds.com/boonbuy-spreadsheet, spreadsheetboonbuy.com, chinagrails.com/en/spreadsheet/agent/boonbuy,
+       boon-buy.net/spreadsheet/, qcradar.com/boonbuy-spreadsheet, boonbuy-spreadsheets.com et boonbuy.me.
+       Thèmes récurrents : catégories, liens produits, photos QC, tailles et livraison.
+       Les exemples visuels proviennent de Sneaker10, Gucci, Dior, Hermès et Independent Tourist. -->
+  <style>
+    :root {
+      color-scheme: light;
+      --paper: #f7f5ee;
+      --white: #fffdfa;
+      --ink: #263630;
+      --muted: #515d56;
+      --line: #d4d9cb;
+      --green: #304b40;
+      --lime: #e1efb9;
+      --soft: #edf0e6;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    body { margin: 0; background: var(--paper); color: var(--ink); font: 1rem/1.6 system-ui, sans-serif; }
+    a { color: inherit; }
+    :focus-visible { outline: 3px solid #885029; outline-offset: 4px; }
+    .wrap { width: min(72rem, calc(100% - 2rem)); margin-inline: auto; }
+    .masthead { border-bottom: 1px solid var(--line); }
+    .masthead .wrap, .footer .wrap {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: .5rem 1.5rem;
+      padding-block: .9rem;
+    }
+    .brand { font-weight: 800; text-decoration: none; }
+    .masthead p, .footer p { margin: 0; font-size: .875rem; }
+    h1, h2, h3, p { margin-top: 0; }
+    h1, h2 { font-family: Georgia, serif; font-weight: 500; line-height: 1.07; }
+    h1 { font-size: clamp(2.35rem, 6.6vw, 5.2rem); letter-spacing: -.04em; margin-bottom: 1rem; }
+    h2 { font-size: clamp(1.8rem, 4vw, 3rem); letter-spacing: -.025em; margin-bottom: 1rem; }
+    h3 { font-size: 1.16rem; line-height: 1.25; }
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr);
+      margin-top: 1.1rem;
+      border-radius: 1.35rem;
+      overflow: hidden;
+      background: var(--green);
+      color: var(--white);
+    }
+    .hero-copy { align-self: center; padding: clamp(1.35rem, 5vw, 4.25rem); }
+    .hero-copy p { max-width: 49ch; }
+    .hero-copy .note { font-size: .86rem; margin: .85rem 0 0; color: #e1e9df; }
+    .button {
+      display: inline-flex;
+      align-items: center;
+      min-height: 2.75rem;
+      padding: .65rem 1rem;
+      border-radius: .55rem;
+      background: var(--lime);
+      color: #24352c;
+      font-weight: 750;
+      text-decoration: none;
+    }
+    .button:hover { background: #f3fbdc; }
+    figure { margin: 0; }
+    .hero-photo { display: grid; align-content: center; background: #e9ecdf; color: var(--ink); }
+    .hero-photo img { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: contain; mix-blend-mode: multiply; }
+    figcaption { padding: .75rem 1rem; font-size: .88rem; }
+    .section { margin-block: clamp(2rem, 5vw, 4rem); }
+    .intro { max-width: 69ch; color: var(--muted); }
+    .categories, .photo-grid, .guides { display: grid; gap: .75rem; }
+    .categories { grid-template-columns: repeat(5, minmax(0, 1fr)); margin: 0; padding: 0; list-style: none; }
+    .categories a {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: .4rem;
+      height: 100%;
+      min-height: 3.6rem;
+      padding: .7rem .8rem;
+      border: 1px solid var(--line);
+      border-radius: .6rem;
+      background: var(--white);
+      text-decoration: none;
+      font-size: .92rem;
+      font-weight: 700;
+      line-height: 1.25;
+    }
+    .categories a:hover { background: var(--lime); }
+    .photo-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .photo-grid figure, .guides article { background: var(--white); border: 1px solid var(--line); border-radius: .8rem; overflow: hidden; }
+    .photo-grid img { display: block; width: 100%; height: auto; aspect-ratio: 1; object-fit: contain; background: #fbfbf8; }
+    .guides { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .guides article { padding: 1.15rem; }
+    .guides article p:last-child { margin-bottom: 0; }
+    .checklist { display: grid; gap: .55rem; padding-left: 1.3rem; margin-bottom: 0; max-width: 78ch; }
+    .checklist li { padding-left: .2rem; }
+    .panel { padding: clamp(1rem, 4vw, 2.2rem); background: var(--soft); border-radius: 1rem; }
+    details { border-bottom: 1px solid var(--line); }
+    summary { padding: .9rem 0; cursor: pointer; font-weight: 750; }
+    details p { margin-bottom: 1rem; max-width: 75ch; }
+    .footer { background: var(--green); color: var(--white); }
+    @media (max-width: 56rem) {
+      .categories { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    }
+    @media (max-width: 41rem) {
+      .hero, .guides { grid-template-columns: 1fr; }
+      .categories, .photo-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .hero-photo img { max-height: 15rem; }
+    }
+    @media (forced-colors: active) {
+      .button { border: 1px solid ButtonText; }
+    }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "inLanguage": "fr",
+    "name": "BoonBuy spreadsheet : questions sur les tailles, les photos QC et la livraison",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Qu’est-ce qu’un BoonBuy spreadsheet ?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "C’est un répertoire de liens produits organisé pour faciliter la recherche et la comparaison. Cette page est un guide indépendant dont les catégories mènent au catalogue HipoBuyFind."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "À quoi servent les photos QC ?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Les photos QC servent à examiner l’article reçu au contrôle qualité. Elles permettent de repérer un écart de couleur, une couture abîmée ou une variante différente. Pour vérifier les dimensions, demandez une photo avec un mètre visible."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Comment choisir une taille sans essayer l’article ?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Mesurez un article qui vous va, puis comparez les valeurs en centimètres avec le tableau du vendeur. Pour un vêtement, posez-le à plat et prenez les mêmes mesures que celles indiquées sur la fiche."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Comment estimer le coût d’une livraison en France ?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Additionnez le prix de l’article, les frais du service et le transport. Vérifiez ensuite les éventuelles taxes et les frais de traitement. Le poids facturable peut dépendre des dimensions du colis et du mode d’expédition."
+        }
+      }
+    ]
+  }
+  </script>
+<link rel="canonical" href="https://kakobuyfinds.github.io/rutbz/">
+</head>
+<body>
+  <header class="masthead">
+    <div class="wrap">
+      <a class="brand" href="https://www.hipobuyfind.com">HipoBuyFind.com</a>
+      <p>Guide d’achat en français</p>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero" aria-labelledby="page-title">
+      <div class="hero-copy">
+        <h1 id="page-title">BoonBuy spreadsheet</h1>
+        <p>Choisissez une catégorie, comparez les fiches et repérez les détails à vérifier avant de commander, des mesures aux photos de contrôle qualité.</p>
+        <a class="button" href="https://www.hipobuyfind.com">Explorer HipoBuyFind <span aria-hidden="true">&nbsp;↗</span></a>
+        <p class="note">Guide indépendant. Les liens du catalogue ouvrent HipoBuyFind.</p>
+      </div>
+      <figure class="hero-photo">
+        <img src="https://www.sneaker10.cy/2984291-product_medium/nike-air-force-1-07.jpg"
+             width="640" height="480" alt="Basket Nike Air Force 1 ’07 blanche"
+             fetchpriority="high" loading="eager" decoding="async">
+        <figcaption>Nike Air Force 1 ’07, exemple de silhouette basse.</figcaption>
+      </figure>
+    </section>
+
+    <nav class="section" aria-labelledby="categories-title">
+      <h2 id="categories-title">Explorer par catégorie</h2>
+      <ul class="categories">
+        <li><a href="https://hipobuyfind.com/category-911-Shoes.html">Chaussures <span aria-hidden="true">↗</span></a></li>
+        <li><a href="https://hipobuyfind.com/category-912-Hoodies%2FSweaters.html">Sweats et pulls <span aria-hidden="true">↗</span></a></li>
+        <li><a href="https://hipobuyfind.com/category-913-T-Shirts.html">T-shirts <span aria-hidden="true">↗</span></a></li>
+        <li><a href="https://hipobuyfind.com/category-914-Jackets.html">Vestes <span aria-hidden="true">↗</span></a></li>
+        <li><a href="https://hipobuyfind.com/category-915-Pants%2FShorts.html">Pantalons et shorts <span aria-hidden="true">↗</span></a></li>
+        <li><a href="https://hipobuyfind.com/category-916-Headwear.html">Casquettes et bonnets <span aria-hidden="true">↗</span></a></li>
+        <li><a href="https://hipobuyfind.com/category-917-Sets.html">Ensembles <span aria-hidden="true">↗</span></a></li>
+        <li><a href="https://hipobuyfind.com/category-918-underwear%2Funderpants.html">Sous-vêtements <span aria-hidden="true">↗</span></a></li>
+        <li><a href="https://hipobuyfind.com/category-919-Jersey.html">Maillots <span aria-hidden="true">↗</span></a></li>
+        <li><a href="https://hipobuyfind.com/category-920-Accessories.html">Accessoires <span aria-hidden="true">↗</span></a></li>
+      </ul>
+    </nav>
+
+    <section class="section" aria-labelledby="photos-title">
+      <h2 id="photos-title">Les détails à regarder sur une photo</h2>
+      <p class="intro">Ces modèles illustrent les éléments à comparer. Consultez chaque fiche du catalogue pour connaître les variantes proposées.</p>
+      <div class="photo-grid">
+        <figure>
+          <img src="https://media.gucci.com/style/HEXFBFBFB_South_0_160_640x640/1751298339/838745_3HBC4_2600_001_100_0000_Light.jpg"
+               width="640" height="640" alt="Casquette Gucci en toile beige à motif GG" loading="lazy" decoding="async">
+          <figcaption><strong>Casquette Gucci.</strong> Repérez la forme de la visière et demandez la plage de réglage.</figcaption>
+        </figure>
+        <figure>
+          <img src="https://assets.christiandior.com/is/image/diorprod/943J605A0554C080_E01-3?%24default_GHC%24=&amp;crop=438%2C150%2C1130%2C1358&amp;wid=440"
+               width="440" height="529" alt="T-shirt Dior CD Icon blanc à col rond" loading="lazy" decoding="async">
+          <figcaption><strong>T-shirt Dior.</strong> Observez le col, la ligne des épaules et le tombé des manches.</figcaption>
+        </figure>
+        <figure>
+          <img src="https://assets.hermes.com/is/image/hermesproduct/bracelet-clic-h--700001F%204P-front-1-300-0-1000-1000_b.jpg?wid=440"
+               width="440" height="440" alt="Bracelet Hermès Clic H avec fermoir en forme de H" loading="lazy" decoding="async">
+          <figcaption><strong>Bracelet Hermès.</strong> Demandez un gros plan du fermoir et la circonférence intérieure.</figcaption>
+        </figure>
+        <figure>
+          <img src="https://cdn.shopify.com/s/files/1/0291/4536/6588/products/29388c85571b45f0a1a71cbae21a884a.jpg?v=1708989295&amp;width=440"
+               width="440" height="440" alt="Sac de voyage Louis Vuitton Keepall 45 en toile monogrammée brune" loading="lazy" decoding="async">
+          <figcaption><strong>Sac Louis Vuitton.</strong> Regardez les coins, les poignées et les points d’attache.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="guides-title">
+      <h2 id="guides-title">Trois guides pour préparer votre sélection</h2>
+      <div class="guides">
+        <article>
+          <h3>Chaussures et vêtements : partir de vos mesures</h3>
+          <p>Pour comparer des baskets, relevez votre pointure et la longueur de la semelle intérieure d’une paire confortable. Confirmez que la fiche indique la longueur de semelle ou celle du pied avant de comparer les chiffres.</p>
+          <p>Pour un sweat, un pull ou une veste, mesurez la largeur de poitrine à plat, la longueur du dos et celle des manches. Pour un pantalon, ajoutez le tour de taille et l’entrejambe. Pour un ensemble, vérifiez si le haut et le bas peuvent être choisis séparément.</p>
+        </article>
+        <article>
+          <h3>Liens produits et photos QC : vérifier la variante</h3>
+          <p>Lorsque vous ouvrez un lien produit depuis un répertoire, vérifiez que la référence, le coloris et la taille sélectionnée correspondent à votre choix. Sur une fiche Weidian, Taobao ou 1688, une même annonce peut regrouper plusieurs variantes.</p>
+          <p>Demandez les angles utiles au contrôle qualité : vue de profil et semelle pour des sneakers, étiquette et coutures pour un maillot, gros plan de la fermeture pour un sac. Une photo à la lumière du jour aide à comparer deux teintes proches.</p>
+        </article>
+        <article>
+          <h3>Frais de livraison : comparer le total jusqu’en France</h3>
+          <p>Comparez le coût total du panier avec le prix de l’article, les frais éventuels de service, le transport et les taxes applicables à votre destination. Demandez quels frais sont inclus dans l’estimation avant de valider.</p>
+          <p>Un colis léger peut occuper beaucoup de place. Comparez le poids réel et le poids volumétrique selon le mode d’expédition, surtout si vous gardez la boîte des chaussures. Vérifiez aussi le suivi du colis et les conditions de retour.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section panel" aria-labelledby="checklist-title">
+      <h2 id="checklist-title">Les informations à garder pour chaque article</h2>
+      <p class="intro">Quand deux fiches se ressemblent, notez les mêmes éléments pour les comparer sans rouvrir chaque annonce.</p>
+      <ul class="checklist">
+        <li><strong>Chaussures et maillots.</strong> Référence, coloris, pointure ou taille, et photo de l’étiquette.</li>
+        <li><strong>Sweats, vestes et pantalons.</strong> Composition du tissu, coupe, mesures en centimètres et détails des fermetures.</li>
+        <li><strong>Casquettes et sous-vêtements.</strong> Tour de tête ou tour de taille, plage de réglage et matière en contact avec la peau.</li>
+        <li><strong>Sacs et bijoux.</strong> Dimensions, matière, type de fermoir et vue de près des zones d’usure.</li>
+        <li><strong>Commande et transport.</strong> Variante confirmée, photos de contrôle, frais estimés et conditions de retour.</li>
+      </ul>
+    </section>
+
+    <section class="section" aria-labelledby="faq-title">
+      <h2 id="faq-title">Questions fréquentes</h2>
+      <details open>
+        <summary>Qu’est-ce qu’un BoonBuy spreadsheet ?</summary>
+        <p>C’est un répertoire de liens produits organisé pour faciliter la recherche et la comparaison. Cette page est un guide indépendant dont les catégories mènent au catalogue HipoBuyFind.</p>
+      </details>
+      <details>
+        <summary>À quoi servent les photos QC ?</summary>
+        <p>Les photos QC servent à examiner l’article reçu au contrôle qualité. Elles permettent de repérer un écart de couleur, une couture abîmée ou une variante différente. Pour vérifier les dimensions, demandez une photo avec un mètre visible.</p>
+      </details>
+      <details>
+        <summary>Comment choisir une taille sans essayer l’article ?</summary>
+        <p>Mesurez un article qui vous va, puis comparez les valeurs en centimètres avec le tableau du vendeur. Pour un vêtement, posez-le à plat et prenez les mêmes mesures que celles indiquées sur la fiche.</p>
+      </details>
+      <details>
+        <summary>Comment estimer le coût d’une livraison en France ?</summary>
+        <p>Additionnez le prix de l’article, les frais du service et le transport. Vérifiez ensuite les éventuelles taxes et les frais de traitement. Le poids facturable peut dépendre des dimensions du colis et du mode d’expédition.</p>
+      </details>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">
+      <p>Guide indépendant de comparaison et de sélection.</p>
+      <a class="brand" href="https://www.hipobuyfind.com">HipoBuyFind.com ↗</a>
+    </div>
+  </footer>
+</body>
+</html>
